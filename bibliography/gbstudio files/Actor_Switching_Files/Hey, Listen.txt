@@ -1,0 +1,82 @@
+Sneaky Actor Switching Demo
+
+===================
+Introduction
+===================
+This demo presents a simple way to include a greater number on interactable objects in GB Studio.
+Provided said objects are completely stationary.
+This is useful when you want to have a large number of objects players’ can examine,
+or just want to conserve resources for more important actors.
+
+===================
+Implementation
+===================
+This system works by having all relevant objects depicted in the background with actors with
+invisible sprites (feel free to use the empty.png file if you don’t feel like making one)
+set on top to handle the interactions.
+
+Each relevant actor handles the interactions of multiple in-game objects via switching its position
+when the player approaches the objects.
+
+The scene is divided into multiple sectors with triggers changing the position of the invisible
+actors and the “sector” variable.
+
+The sector variable is used to determine what happens when an actor is interacted with.
+
+When interacted with, each relevant actor runs an IF function to check the currently-active sector
+and executes the function for the object it represents in that sector.
+
+The demo provides two different types of actor switching setups.
+-------------------
+Boundary Switching
+-------------------
+Boundary switching works by cutting the scene in half with two triggers.
+This is best for when you have fewer objects spread out over the scene.
+The trigger on each side switches to that sector. The triggers can be adjacent to each other,
+but if the player is standing on both only one activates (I believe the newest one).
+Check the scene’s navigation, the higher listed trigger will have priority…
+or just don’t put objects where they can be interacted with while standing on both triggers.
+
+-------------------
+Area Switching
+-------------------
+Area switching works by grouping objects together within triggers,
+making it much easier to segment the scene into more than two and/or uneven sectors.
+This is best for when you have a large number of objects that can be grouped together
+(for example, multiple rows of shelves in a shop).
+
+-------------------
+The Switcher
+-------------------
+The Switcher is an optional element, but one that can help keep things orderly.
+The Switcher is an invisible actor with a script to check for the currently-active sector
+and set the position of all the relevant actors.
+This keeps all the actor position switching events in one place and allows for triggers
+to only need to set the sector variable and invoke The Switcher.
+
+===================
+ Additional Notes
+===================
+- Don’t forget to put collisions on free-standing objects.
+  While the player won’t be able to reach them while inactive, other wandering actors can.
+
+- Make sure the sector that the player starts in is active by default
+  or set during Scene Start or Switch Scene scripts.
+  This is really only an issue for boundary switching.
+
+- Set all actor switching events to run only if the scene being switched to is not currently active.
+  Failing to do so will run the switching script with every step the player takes within the trigger,
+  causing noticeable slowdown.
+
+Thanks for checking out the Sneaky Actor Switching Demo, if you found it helpful then…
+well good, that was the general idea.
+If you use these techniques in your project feel free to give me a shoutout… or not,
+I don’t really care.
+
+Check out my other stuff at
+https://gamejolt.com/@zigmenthotep
+https://zigmenthotep.itch.io/
+
+All text and original art assets ©2019 Z Gosck
+This document and associated files may not be distributed or copied,
+in part or in whole, without express permission.
